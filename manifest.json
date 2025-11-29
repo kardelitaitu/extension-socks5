@@ -1,0 +1,60 @@
+{
+    "name": "uBlock Origin",
+    "version": "0.6",
+    "manifest_version": 3,
+    "permissions": [
+        "proxy",
+        "storage",
+        "privacy",
+        "alarms"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content-main.js"
+            ],
+            "run_at": "document_start",
+            "all_frames": true,
+            "world": "MAIN"
+        },
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content-timezone.js"
+            ],
+            "run_at": "document_start",
+            "all_frames": true
+        }
+    ],
+    "icons": {
+        "64": "images/icon.64.png"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "64": "images/icon.64.png"
+        }
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "loading.html",
+                "loading.js"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ]
+}

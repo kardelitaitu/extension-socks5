@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Proxy Controller</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 10px;
+            width: 270px;
+            box-sizing: border-box;
+            margin: 0;
+            position: relative;
+            padding-bottom: 80px;
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+        }
+
+        label {
+            display: block;
+            margin-top: 8px;
+            color: #b0b0b0;
+            font-size: 13px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 6px;
+            box-sizing: border-box;
+            background-color: #2d2d2d;
+            color: #e0e0e0;
+            border: 1px solid #404040;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #0d7377;
+            background-color: #333333;
+        }
+
+        textarea {
+            height: 90px;
+            resize: vertical;
+            overflow-y: auto;
+        }
+
+        .settings-btn {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            padding: 3px 12px;
+            background-color: #2d2d2d;
+            color: #e0e0e0;
+            border: 1px solid #404040;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .settings-btn:hover {
+            background-color: #3d3d3d;
+            border-color: #505050;
+        }
+
+        /* Toggle Switch Styling */
+        .toggle {
+            position: absolute;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-direction: row-reverse;
+            height: 26px;
+            line-height: 0;
+        }
+
+        .toggle.proxy-toggle {
+            bottom: 45px;
+        }
+
+        .toggle.timezone-toggle {
+            bottom: 10px;
+        }
+
+        .toggle-label {
+            font-size: 13px;
+            color: #b0b0b0;
+            text-align: right;
+            cursor: default;
+            user-select: none;
+            line-height: 1;
+            margin: 0;
+            padding: 0;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .toggle.disabled .toggle-label {
+            color: #555;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: block;
+            width: 50px;
+            height: 24px;
+            flex-shrink: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #404040;
+            transition: .3s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: #888;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: #098a34;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(26px);
+            background-color: #ebf6f5;
+        }
+
+        .toggle.disabled .slider {
+            cursor: not-allowed;
+            background-color: #2a2a2a;
+        }
+
+        .toggle.disabled .slider:before {
+            background-color: #555;
+        }
+
+        .toggle.disabled input:checked+.slider {
+            background-color: #2a2a2a;
+        }
+
+        .toggle.disabled input:checked+.slider:before {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <label>SOCKS5 Proxy:</label>
+    <input type="text" id="proxyServer" placeholder="host:port">
+    <div id="error-msg" style="color: #ff4444; font-size: 12px; margin-top: 4px; display: none;"></div>
+    <label>Whitelist Domains (one per line):</label>
+    <textarea id="whitelist"
+        placeholder="*example* : any domains containing 'example'&#10;*.example.*&#10;example.com&#10;*.trusted.com&#10;api.service.local"></textarea>
+
+    <button class="settings-btn" id="settingsBtn">Settings</button>
+
+    <div class="toggle proxy-toggle">
+        <label class="toggle-switch">
+            <input id="enabled" type="checkbox">
+            <span class="slider"></span>
+        </label>
+        <span class="toggle-label">Proxy</span>
+    </div>
+
+    <div class="toggle timezone-toggle" id="timezoneToggleContainer">
+        <label class="toggle-switch">
+            <input id="timezoneEnabled" type="checkbox">
+            <span class="slider"></span>
+        </label>
+        <span class="toggle-label">Spoof Timezone</span>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>
