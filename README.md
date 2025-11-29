@@ -2,6 +2,8 @@
 
 A powerful, privacy-focused Chrome extension that integrates a SOCKS5 proxy with intelligent timezone spoofing. It ensures your browser's timezone always matches your proxy location, preventing common identity leaks.
 
+<img><img width="343" height="362" alt="ss-socks5" src="https://github.com/user-attachments/assets/3f866479-8311-4bc9-8541-3a13d1a10603" />
+
 ## 🚀 Key Features
 
 *   **SOCKS5 Proxy Support**: Easily configure your SOCKS5 proxy (Host:Port).
@@ -79,3 +81,4 @@ This tool is for educational and privacy protection purposes. The author is not 
 This project is licensed for **Personal Use Only**.
 **Commercial use is strictly prohibited** without prior permission from the author.
 Please contact the author for commercial inquiries.
+
